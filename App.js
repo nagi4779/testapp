@@ -23,22 +23,33 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <TestBridge exampleProp = "Hello World!" style={{width: 100, height: 100}} />
+        <TestBridge style={{padding:10,height:40}} exampleProp="Login Form"/>
+        <TextInput style = {styles.input}
+                   autoCapitalize="none"
+                   onSubmitEditing={() => this.passwordInput.focus()}
+                   autoCorrect={false}
+                   keyboardType='email-address'
+                   returnKeyType="next"
+                   placeholder='Email '
+                   placeholderTextColor='blue'/>
+        <TextInput style = {styles.input}
+                   returnKeyType="go"
+                   ref={(input)=> this.passwordInput = input}
+                   placeholder='Password'
+                   placeholderTextColor='blue'
+                   secureTextEntry/>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text  style={styles.buttonText}>LOGIN</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
+    container: {
+        padding: 20
+    },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
@@ -49,4 +60,21 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+    input:{
+        marginTop:20,
+        height: 40,
+        backgroundColor: 'rgba(225,225,225,0.2)',
+        marginBottom: 10,
+        padding: 10,
+        color: '#fff'
+    },
+    buttonContainer:{
+        backgroundColor: '#2980b6',
+        paddingVertical: 15
+    },
+    buttonText:{
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: '700'
+    }
 });
