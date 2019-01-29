@@ -11,7 +11,8 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 
 public class TestBridgeManager extends SimpleViewManager<View> {
     public static final String REACT_CLASS = "TestBridge";
-
+    private ThemedReactContext mcontext;
+    private View view;
     @Override
     public String getName() {
         // Tell React the name of the module
@@ -23,12 +24,16 @@ public class TestBridgeManager extends SimpleViewManager<View> {
     public View createViewInstance(ThemedReactContext context){
         // Create a view here
         // https://facebook.github.io/react-native/docs/native-components-android.html#2-implement-method-createviewinstance
-        return new View(context);
+         mcontext = context;
+        view = new View(context);
+        view.setBackgroundColor(Color.BLUE);
+        return view;
     }
 
     @ReactProp(name = "exampleProp")
-    public void setExampleProp(View view, String prop) {
+    public void setExampleProp(View view, String exampleProp) {
         // Set properties from React onto your native component via a setter method
         // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
+      //view.setExampleProp(exampleProp);
     }
 }
