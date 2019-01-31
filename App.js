@@ -8,8 +8,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import TestBridge from './TestBridgeNativeView'
+import {Platform, StyleSheet, Text, View,TextInput,TouchableOpacity,NativeModules} from 'react-native';
+//import TestBridge from './TestBridgeNativeView'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,28 +18,16 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const activityStarter = NativeModules.TestBridge;
+console.log("Activity Log =>"+activityStarter);
+
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <TestBridge style={{padding:10,height:40}} exampleProp="Login Form"/>
-        <TextInput style = {styles.input}
-                   autoCapitalize="none"
-                   onSubmitEditing={() => this.passwordInput.focus()}
-                   autoCorrect={false}
-                   keyboardType='email-address'
-                   returnKeyType="next"
-                   placeholder='Email '
-                   placeholderTextColor='blue'/>
-        <TextInput style = {styles.input}
-                   returnKeyType="go"
-                   ref={(input)=> this.passwordInput = input}
-                   placeholder='Password'
-                   placeholderTextColor='blue'
-                   secureTextEntry/>
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text  style={styles.buttonText}>LOGIN</Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => activityStarter.navigateToLoginExample()}>
+          <Text  style={styles.buttonText}>CLICK TO VIEW LOGIN</Text>
         </TouchableOpacity>
       </View>
     );
@@ -48,7 +36,8 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+        marginTop:50
     },
   welcome: {
     fontSize: 20,
